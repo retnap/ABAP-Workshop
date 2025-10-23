@@ -128,6 +128,13 @@ ENDIF.
 
 ## 🖼 Görseller
 
+<img width="582" height="377" alt="01_Variable_Definition" src="https://github.com/user-attachments/assets/76293555-ca37-4131-9338-b3ed28730816" />
+
+<img width="786" height="618" alt="02_Data_Types_and_System_Fields" src="https://github.com/user-attachments/assets/70539888-d99e-448d-aeaa-86e9b8e9a1d6" />
+
+---
+
+<img width="497" height="397" alt="03_Terminal" src="https://github.com/user-attachments/assets/e175adb2-d0af-48eb-9cca-4df7838bd31f" />
 
 
 
