@@ -1,0 +1,14 @@
+# 📘 02. Data Types (Advanced) & Types & Initial Values 
+
+## 🎯 Bu bölümde hangi konular olacak? 
+
+Bu bölümde, ABAP'ta veri tiplerini daha detaylı olarak ele alacağız. Temel tiplerin ötesine geçerek:
+- Domain kullanım mantığı
+- TYPES komutu ile tip tanımlama 
+- Initial Value kavramı 
+- Pointer tip değişkenler üzerinde durulmuştur. 
+
+Amaç: Veri yapılarının bellekte nasıl davrandığını anlamak, kendi veri tiplerimizi oluşturmak ve veri tiplerinin başlangıç değerlerinin nasıl verildiğini kavramaktır. 
+
+---
+
