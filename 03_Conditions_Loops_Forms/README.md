@@ -1,1 +1,182 @@
+# 📘 03. Conditions & Loops & Forms 
+
+## Bu bölümde hangi konular olacak ? 
+
+Bu bölümde ABAP'ta sıkça kullanılan **koşul ifadeleri**, **döngüler** ve programların daha düzenli hale gelmesini sağlayan **PERFORM - FORM** yapılarını ele alacağız. 
+
+Amaç: Koşul ifadeleri ile karar verme mekanizmaları oluşturmak, döngüler ile tekrarlayan işlemleri yönetmek ve forms ile kod modülerizasyonunu sağlamaktır. 
+
+---
+
+## 🧩 Conditions (Koşul İfadeleri)
+
+Koşul ifadeleri, program akışına göre belirli bir şartın doğru olup olmadığını kontrol edilmesi sonucuna göre farklı kod bloklarının çalıştırılmasını sağlar. ABAP'ta en yaygın koşul ifadeleri şunlardır:
+
+### -IF... ENDIF Yapısı-
+   
+Bu yapı, çoğu programlama dilinde olduğu gibi en temel karar verme mekanizmasıdır. Bir veya birden fazla koşulu kontrol etmektedir.
+
++ **Temel Kullanım:** Eğer koşul (condition) doğruysa (TRUE), **IF** ve **ENDIF** arasındaki kod çalışır.
+
++ **Alternatif Koşul (ELSEIF):** İlk koşul yanlışsa, ikinci bir koşulu kontrol etmek için kullanılır. İhtiyaca göre istenildiği kadar ELSEIF eklenebilir.
+
++ **Varsayılan Durum (ELSE):** Yukarıda bahsedilen koşulların hiçbiri doğru değilse çalışacak olan kod ELSE altında yazılan kodlardır.  
+
+
+```abap
+DATA: lv_sayi TYPE i.
+
+lv_sayi = 15.
+
+IF lv_sayi = 10.
+  WRITE:/ 'Sayi degeri: ', lv_sayi.
+
+ELSEIF lv_sayi > 10.
+  WRITE:/ 'Sayi degeri 10''dan buyuk.'.
+
+ELSEIF lv_Sayi < 10.
+  WRITE:/ 'Sayi degeri 10''dan kucuk.'.
+
+ELSE.
+  WRITE:/ 'Gecerli sayi degeri girin.'.
+
+ENDIF.
+```
+
+
+```abap
+DATA: lv_age TYPE i VALUE 20,
+      lv_result TYPE string.
+
+IF lv_age < 18.
+  lv_result = 'Resit degil.'.
+
+ELSEIF lv_age >= 18 AND lv_age < 65.
+  lv_result = 'Calisabilir yas araliginda.'.
+
+ELSE.
+  lv_result = 'Emeklilik yasinda.'.
+
+ENDIF.
+
+WRITE:/ lv_result.
+```
+
+
+### -CASE... ENDCASE Yapısı- 
+
+Bazı durumlarda birden fazla farklı değeri tek bir değişken için kontrol etmek gerektiğinde CASE yapısı, iç içe IF-ELSEIF kullanmaktan daha verimli bir alternatif olabilir. 
+
++ **Kontrol Edilen ALan:** CASE ifadesinden sonra belirtilen alanın değeri, WHEN ifadeleriyle karşılaştırılır.
+
++ **Değer Eşleşmesi(WHEN):** Eğer alanın değeri WHEN ile belirtilen değere eşitse, o blok çalışır.
+
++ **Varsayılan Durum (WHEN OTHERS): Hiçbir WHEN koşulunun sağlanmaması durumunda çalışacak kod bloğunu belirtir.
+
+
+```abap
+DATA lv_renk TYPE c LENGTH 1 VALUE 'M'.
+
+CASE lv_renk.
+  WHEN 'K'.
+    WRITE:/ 'Kırmızı'.
+  WHEN 'M'.
+    WRITE:/ 'Mor'.
+  WHEN OTHERS.
+    WRITE:/ 'Bilinmeyen Renk'.
+ENDCASE. 
+```
+
+```abap
+DATA lv_day TYPE i VALUE 2.
+DATA lv_name TYPE string.
+
+CASE lv_day.
+  WHEN 1.
+    lv_name = 'Pazartesi'.
+  WHEN 2.
+    lv_anme = 'Salı'.
+  WHEN 3.
+    lv_name = 'Çarşamba'.
+  WHEN 4.
+    lv_name = 'Perşembe'.
+  WHEN OTHERS.
+    lv_name = 'Geçerli bir gün girilmedi'.
+ENDCASE.
+
+WRITE:/ lv_name. 
+```
+
+--- 
+
+## 🧩 Loops (Döngüler)
+
+Döngüler, aynı kod bloğunu belirlenen koşul sağlanıncaya kadar veya belirli bir veri kümesi boyuca tekrar tekrar çalıştırmak için kullanılır. 
+
+### 1. DO...ENDDO Yapısı 
+
+Belirli bir sayıda veya koşul doğru olduğu sürece tekrarlamak için kullanılan genel döngü yapısıdır. 
+
++ **Belirli Sayıda Tekrar:** **DO N TIMES.** biçiminde kullanılır ve döngünün **N** kez çalışmasını sağlar.
+
++ **Koşula Bağlı Tekrar:** Koşul içinde bir **EXIT** veya **CONTINUE** ifadesi ile sonsuz bir döngü oluşturulup, içerideki bir IF kontrolüyle kırılabilir.
+
+```abap
+DATA gv_i TYPE i.
+
+DO 5 TIMES.
+  gv_i = sy-index.     " sy-index, mevcut iterasyon numarasını tutar (1'den başlar)
+  WRITE:/ 'Iterasyon:', gv_i.
+ENDDO. 
+```
+
+### 2. WHILE... ENDWHILE Yapısı 
+
+Belirtilen bir koşul doğru olduğu sürece çalışır. 
+
++ **Koşul Kontrolü:** Döngüye her girildiğinde belirlenen koşul kontrol edilir. Koşul yanlış hale geldiği anda döngü durur.
+
+```abap
+DATA gv_sayac TYPE i VALUE 1.
+
+WHILE gv_sayac <= 3.
+  WRITE:/ 'Sayac: ', gv_sayac.
+  gv_sayac = gv_sayac + 1.      " Sayaç artırılmazsa sonsuz döngü oluşur.
+ENDWHILE. 
+```
+
+
+### 3. LOOP AT... ENDLOOP Yapısı 
+
+ABAP'ta en sık kullanılan döngü ve en önemli döngü yapısıdır. Bunun sebebi Internal Table adı verilen veri koleksiyonları üzerindeki her satırı tek tek işlemek için kullanılmasıdır. 
+
++ **Satır İşleme:** Her iterasyonda, iç tablonun bir satırı belirlenen bir **Structure** veya **Filed Symbol** içine aktarılır ve kod o satır üzerinde işlem yapar.
+
+```abap
+TYPES: BEGIN OF ty_person,
+        name TYPE string,
+        age TYPE i,
+      END OF ty_person.
+
+DATA: lt_people TYPE INTERNAL TABLE OF ty_person,
+      ls_people TYPE ty_person.
+
+ls_person-name = 'Ahmet'.
+ls_person-age = 30.
+
+APPEND ls_person TO lt_people.
+
+ls_person-name = 'Ayşe'.
+ls_person-age = 25.
+
+APPEND ls_person TO lt_people.
+
+LOOP AT lt_people INTO ls_person,
+  WRITE:/ 'Name: ', ls_person-name,
+          'Age: ', ls_person-age.
+ENDLOOP. 
+```
+
+
+
 
