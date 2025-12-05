@@ -22,7 +22,7 @@ Bir structure içerisinde **alan isimleri (field names)**, **veri tipleri (data 
 
 + Programlarda ve başka kaynaklarda **work area** adıyla da geçmektedir.
 
-## Structure Türleri 
+## 📜 Structure Türleri 
 
 ### A. Flat Structure
 
@@ -48,7 +48,7 @@ DATA: lt_emp TYPE TABLE OF ty_employee,
 ```
 
 
-## Structure Nasıl Oluşturulur ? 
+## 📜 Structure Nasıl Oluşturulur ? 
 
 ### 1. SE11 transaction kodu üzerinden 
 
@@ -93,7 +93,7 @@ DATA: BEGIN OF gs_musteri_bilgi,
 ```
 
 
-## Structure Alanlarına Erişim 
+## 📜 Structure Alanlarına Erişim 
 
 Structure alanlarına erişim, alan adından önce yapının adını ve araya bir tire işareti (-) koyarak yapılır. 
 
@@ -112,3 +112,146 @@ RITE: / 'Sicil No   :', gs_calisan_kayit-sicil_no,
 " Bütün bir yapıyı sıfırlama (Initial Value)
 CLEAR gs_calisan_kayit. 
 ```
+
+
+---
+
+# INTERNAL TABLES 
+
+## :scroll: Internal Table Nedir ? 
+
+ABAP Programının RAM belleğinde çalışan geçici tablolardır. Database'de saklanmazlar. 
+
++ Structure (work area) ile işlem yapılır.
+
++ Loop döngüsü ile okunur.
+
++ Append, Insert, Modify, Delete işlemleri yapılabilir.
+
++ ALV raporlamada, SELECT sonuçlarında, hesaplamalarda kullanılır.
+
+## :scroll: Internal Table Türleri 
+
+### A. Standard Table 
+
++ En çok kullanılan tablo türüdür.
+
++ Satırlar index ile erişilebilir.
+
++ Append ile sona eklenir.
+
++ Sıralı arama algoritması ile çalışır. 
+
++ Syntax:
+
+```abap
+DATA: lt_tab TYPE STANDARD TABLE OF ty_row. 
+```
+
+### B. Sorted Table 
+
++ Tablonun satırları anahtar alanlara göre otomarik sıralıdır.
+
++ **Binary Search** arama algoritması ile çalışır.
+
++ Syntax:
+
+```abap
+DATA: lt_tab TYPE SORTED TABLE OF ty_row WITH UNIQUE KEY field. 
+```
+
+### C. Hashed Table 
+
++ **Hash Algoritaması**nı kullanır.
+
++ Satır arama işlemi O(1) hızında yapılır (en hızlısı).
+
++ Yalnızca **key** ile erişilebilir.
+
++ LOOP ile satır satır okumak yavaştır.
+
++ Syntax:
+
+```abap
+DATA: lt_tab TYPE HASHED TABLE OF ty_row WITH UNIQUE KEY field. 
+```
+
+## 📜 Internal Table İşlemleri 
+
+Aşağıda yapacağımız örneklerde aynı structure'ı kullanacağız:
+
+```abap
+TYPES: BEGIN OF ty_student,
+         id    TYPE i,
+         name  TYPE string,
+         score TYPE i,
+       END OF ty_student.
+```
+
+### A. Kayıt Eklemek (APPEND)
+
+```abap
+DATA: lt_std TYPE TABLE OF ty_student,
+      ls_std TYPE ty_student.
+
+ls_std-id = 1.
+ls_std-name = 'Ali'.
+ls_std-score = 90.
+APPEND ls_std TO lt_std.
+
+CLEAR ls_std.
+
+ls_std-id = 2.
+ls_std-name = 'Veli'.
+ls_std-score = 85.
+APPEND ls_std TO lt_std.
+```
+
+
+### B. Kayıt Okuma (LOOP)
+
+```abap
+LOOP AT lt_std INTO ls_std.
+    WRITE: / ls_std-id, ls_std-name, ls_std-score.
+ENDLOOP.    
+```
+
+### C. READ TABLE (Tek Kayıt Bulma)
+
+Index ile:
+
+```abap
+READ TABLE lt_std INTO ls_std INDEX 1.
+```
+
+Key ile:
+
+```abap
+READ TABLE lt_std WITH KEY id = 2.
+```
+
+### D. MODIFY (Mevcut Kaydı Güncelleme)
+
+```abap
+READ TABLE lt_std INTO ls_std WITH KEY id = 2.
+
+IF sy-subrc = 0.
+  ls_std-score = 95.
+  MODIFY lt_std FROM ls_std.
+ENDIF.
+```
+
+### E. DELETE (Kayıt Silme)
+
+```abap
+DELETE lt_std WHERE id = 1. 
+```
+
+### F. INSERT (Belirli Index'e Kayıt Ekleme)
+
+```abap
+INSERT ls_std INTO lt_std INDEX 1. 
+```
+
+
+
