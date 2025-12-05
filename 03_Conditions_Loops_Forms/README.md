@@ -191,7 +191,9 @@ ENDLOOP.
 
 + **Tanım Yeri:** Genellikle programın en sonunda veya **INCLUDE** dosyaları içinde tanımlanır.
 
-+ **Parametreler:** **USING** anahtar kelime ile değer alabilir (value ile alandaki değeri) veya **CHANGING** anahtar kelimesi ile dışarıdaki bir değişkenin değerini değiştirebilir. 
++ **Parametreler:** **USING** anahtar kelime ile değer alabilir (value ile alandaki değeri) veya **CHANGING** anahtar kelimesi ile dışarıdaki bir değişkenin değerini değiştirebilir.
+
++ Form'daki parametrelere **formal parametre**, Perform'daki parametrelere **actual parametre** denir. 
 
 ```abap
 REPORT z_form_example.
