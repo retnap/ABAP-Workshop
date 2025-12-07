@@ -4,8 +4,6 @@
 
 Bu bölümde ABAP'ın database işlemlerinin yapı taşlarını oluşturan **structure** ve **table** yapılarını işleyeceğiz. 
 
-Amaç: 
-
 ---
 
 # 🧩 STRUCTURE
