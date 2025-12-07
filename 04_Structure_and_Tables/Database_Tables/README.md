@@ -1,12 +1,12 @@
 ABAP'ta **Database Table** oluşturmak için şu adımları izlememiz gerekiyor:
 
-1. **SE11** transaction koduyla **ABAP Dictionary** ekranını açıyoruz. En üstte bulunan "Database table" seçeneğinin karşısına tablomuzun adını girerek "Create" tuşuna basıyoruz.
+📑 1. **SE11** transaction koduyla **ABAP Dictionary** ekranını açıyoruz. En üstte bulunan "Database table" seçeneğinin karşısına tablomuzun adını girerek "Create" tuşuna basıyoruz.
 
 <img width="488" height="382" alt="Database_Table_1" src="https://github.com/user-attachments/assets/8e31287a-e8ec-4268-b267-8c0978000616" />
 
 --- 
 
-2. "Delivery and Maintenance" sekmesi karşımıza çıkıyor. Üstte bulunan "Short Description" alanına tablomuz hakkında kısa bir açıklama yazıyoruz. "Delivery Class" olarak Application Table seçeneğini işaretliyoruz.
+📑 2. "Delivery and Maintenance" sekmesi karşımıza çıkıyor. Üstte bulunan "Short Description" alanına tablomuz hakkında kısa bir açıklama yazıyoruz. "Delivery Class" olarak Application Table seçeneğini işaretliyoruz.
 
 + **Delivery Class**, SAP'de tabloların nasıl taşınacağını (transport) ve müşteri/sistem bağımlı olup olmadığını belirleyen bir tekniktir.
 
@@ -56,7 +56,7 @@ ABAP'ta **Database Table** oluşturmak için şu adımları izlememiz gerekiyor:
 
 ---
 
-3. "Fields" sekmesine giderek **Field** ve **Data Element** alanlarını doldurmaya başlayabiliriz.
+📑 3. "Fields" sekmesine giderek **Field** ve **Data Element** alanlarını doldurmaya başlayabiliriz.
 
   Öncelikle "Client Field" alanı olan MANDT yazıp enter tuşuna basıyoruz. Kalan kısımlar otomatik doluyor. 
 
@@ -70,13 +70,13 @@ ABAP'ta **Database Table** oluşturmak için şu adımları izlememiz gerekiyor:
 
 ---
 
-4. ZSTD_ID üstüne çift tıkladıktan sonra Data Element oluşturma onay ekranı karşımıza çıkmış bulunuyor. 
+📑 4. ZSTD_ID üstüne çift tıkladıktan sonra Data Element oluşturma onay ekranı karşımıza çıkmış bulunuyor. 
    
 <img width="576" height="441" alt="Database_Table_4" src="https://github.com/user-attachments/assets/bfc2bb1b-3314-4b8f-a384-5c1a7dce1ab4" />
 
 ---
 
-5. Gelen "Change Data Element" ekranında oluşturacağımız data element için kısa bir açıklama giriyoruz.
+📑 5. Gelen "Change Data Element" ekranında oluşturacağımız data element için kısa bir açıklama giriyoruz.
 
    Elemantary Type -> Domain seçerek (otomatik geliyor) Data Element özelliklerini belirteceğimiz **Domain** yapısının adını giriyoruz.
 
@@ -86,13 +86,13 @@ ABAP'ta **Database Table** oluşturmak için şu adımları izlememiz gerekiyor:
 
 --- 
 
-6. ZSTD_ID üstüne çift tıkladıktan sonra Domain oluşturma onay ekranı karşımıza çıkmış bulunuyor.
+📑 6. ZSTD_ID üstüne çift tıkladıktan sonra Domain oluşturma onay ekranı karşımıza çıkmış bulunuyor.
    
 <img width="569" height="461" alt="Database_Table_6" src="https://github.com/user-attachments/assets/9816a8d8-b5bb-4488-a81b-48ad8f053c4f" />
 
 ---
 
-7. Gelen "Change Domain" ekranında, oluşturacağımız domain için kısa bir açıklama giriyoruz.
+📑 7. Gelen "Change Domain" ekranında, oluşturacağımız domain için kısa bir açıklama giriyoruz.
 
    Ardından id değeri gireceğimiz için Data Type olarak **NUMC** seçiyoruz ve uzunluğunu 15 olarak giriyoruz.
 
@@ -102,8 +102,19 @@ ABAP'ta **Database Table** oluşturmak için şu adımları izlememiz gerekiyor:
 
 ---
 
-8. Oluşturduğumuz domain'i activate ettikten sonra "Change Data Element" ekranına geri dönüyoruz. 
+📑 8. Oluşturduğumuz domain'i activate ettikten sonra "Change Data Element" ekranına geri dönüyoruz.
 
+Ekranı küçülttükçe ya da büyüttükçe yazıların nasıl görüneceğini bu alandan seçiyoruz. 
+
+Aynı şekilde son ayarlarını yaptığımız data element'i de activate ettikten sonra bir önceki ekrana geri dönüyoruz.
 
 <img width="727" height="331" alt="Database_Table_8" src="https://github.com/user-attachments/assets/896b62c3-767c-4dfe-87fd-7d71870dc30c" />
+
+---
+
+📑 9. ZSTD_ID Data Element'ini ve ona bağlı ZSTD_ID Domain'ini oluşturma adımları bitti. Artık Field kısmında data element'in ismini yazıp enter'a bastğımızda kalan kısımlar otomatik olarak dolacaktır.
+
+Geri kalan field alanlar için işlemler aynı şekilde devam etmektedir. Database tablomuzun son görünümü aşağıda bulunan görseldeki gibi olacaktır. 
+
+<img width="935" height="468" alt="Database_Table_9" src="https://github.com/user-attachments/assets/c304e462-ee4b-4614-8664-22e78e8b5669" />
 
