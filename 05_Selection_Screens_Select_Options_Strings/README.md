@@ -211,3 +211,159 @@ SAP projelerinde en sık kullanılan pattern üstteki gibidir. Bu sayede yanlı�
 
 # 🧩 STRINGS
 
+## ⚜️ STRLEN 
+
+Hedeflenen string'in uzunluğunu bulma.
+
+```abap
+DATA(text) = 'Hello World'.
+DATA(len) = strlen( text ).
+
+WRITE:/ 'Uzunluk: ', len.
+```
+
+## ⚜️ CONDENSE 
+
+Metin içindeki birden fazla boşluğu teke düşürür. 
+
+**NO-GAPS** kullanılırsa tüm boşluklar tamamen silinir.
+
+```abap
+DATA: text TYPE string VALUE 'ABAP   Egitim    Serisi'.
+
+CONDENSE text.
+" Sonuç: 'ABAP Egitim Serisi'
+
+CONDENSE text NO-GAPS.
+" Sonuç: 'ABAPEgitimSerisi'
+```
+
+## ⚜️ FIND 
+
+Bir substring'in bulunduğu pozisyonu verir.
+
+```abap
+DATA: text TYPE string VALUE 'ABAP Egitim',
+      pos TYPE i.
+
+FIND 'Egitim' IN text MATCH OFFSET pos.
+
+" pos = 5 döner çünkü 'E' harif 5. indexte bulunuyor
+```
+
+## ⚜️ TRANSLATE
+
+Metni büyük/küçük harfe çevirir veya karakter dönüştürmesi yapar.
+
+```abap
+DATA: text TYPE string VALUR 'Abap Egitim'.
+
+TRANSLATE text TO UPPER CASE.
+" Sonuç: 'ABAP EGITIM'
+
+TRANSLATE text TO LOWER CASE.
+" Sonuç: 'abap egitim'
+```
+
+## ⚜️ SHIFT 
+
+Metni sola veya sağa kaydırır. 
+
+**LEFT**, **RIGHT**, **CIRCULAR**, **DELETING LEADING** gibi ekleri vardır.
+
+```abap
+DATA: text TYPE string VALUE '    ABAP'.
+
+SHIFT text LEFT DELETING LEADING SPACE.
+" Sonuç: 'ABAP'
+```
+
+## ⚜️ SPLIT
+
+Bir metni ayırma karakterine göre böler ve parçlara atar.
+
+```abap
+DATA: text TYPE string VALUE 'ABAP;Egitim;Serisi'.
+DATA: p1 TYPE string,
+      p2 TYPE string,
+      p3 TYPE string.
+
+SPLIT text AT ';' INTO p1 p2 p3.
+
+" p1 = 'ABAP'
+" p2 = 'Egitim'
+" p3 = 'Serisi'
+```
+
+## ⚜️ STRING COMPRASION 
+
+**< > <= >= = <>** operatörleri stringlerde doğrudan çalışır.
+
+```abap
+DATA: t1 TYPE string VALUE 'ABAP',
+      t2 TYPE string VALUE 'ABAP'.
+
+IF t1 = t2.
+  WRITE:/ 'Ayni Metin'.
+ENDIF.
+```
+
+## ⚜️ CONTAINS NOT ONLY
+
+Metin yalnızca belirtilen karakterlerden oluşmuyorsa TRUE döner. 
+
+```abap
+DATA: text TYPE string VALUE 'ABC123'.
+
+IF text CONTAINS NOT ONLY 'ABC'.
+  WRITE:/ 'Sadece ABC degil, baska karakterler de var'.
+ENDIF.
+```
+
+## ⚜️ CONTAINS ANY (CA)
+
+Metin belirtilen karakterleden en az birini içeriyorsa TRUE döner. 
+
+```abap
+DATA: text TYPE string VALUE 'ABAP2025'.
+
+IF text CONTAINS ANY '0123456789'.
+  WRITE 'Sayisal karakter iceriyor'.
+ENDIF.
+```
+
+## ⚜️ CONTAINS NOT ANY 
+
+Metin belirtilen karakterlerden hiçbirini içermiyorsa TRUE döner.
+
+```abap
+DATA: text TYPE string VALUE 'ABAP'.
+
+IF text CONTAINS NOT ANY '0123456789'.
+  WRITE:/ 'Sayi icermiyor.'.
+ENDIF.
+```
+
+## ⚜️ CONTAINS STRING
+
+Metin içinde substring geçiyor mu kontrol eder.
+
+```abap
+DATA: text TYPE string VALUE 'ABAP Egitim'.
+
+IF text CONTAINS STRING 'Egitim'.
+  WRITE 'Bulundu'.
+ENDIF.
+```
+
+## ⚜️ CONTAINS NO STRING
+
+Metin içinde belirtilen substring yoksa TRUE olur. 
+
+```abap
+DATA: text TYPE string VALUE 'ABAP Egitim'.
+
+IF text CONTAINS NO STRING 'Java'.
+  WRITE 'Java gecmiyor'.
+ENDIF.
+```
