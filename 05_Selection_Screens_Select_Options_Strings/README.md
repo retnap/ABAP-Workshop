@@ -2,7 +2,7 @@
 
 ## Bu bölümde hangi konular olacak ? 
 
-Bu bölümde, ABAP raporlarının kullanıcıdan giriş almasını sağlayan **Selection Screen* yapılarını, **Select Options** işlemlerini ve **STRING** manipülasyonlarını ele alacağız. 
+Bu bölümde, ABAP raporlarının kullanıcıdan giriş almasını sağlayan **Selection Screen** yapılarını, **Select Options** işlemlerini ve **STRING** manipülasyonlarını ele alacağız. 
 
 ---
 
